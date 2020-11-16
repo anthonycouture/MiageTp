@@ -25,14 +25,19 @@ Method deleteVoiture(pRequest As msg.deleteVoitureDmde, Output pResponse As msg.
     
     set pResponse = ##class(msg.deleteVoitureRpse).%New()
     set plaque = pRequest.plaque
-    set voitureExist = ##class(data.Voiture).consulterParPlaqueExists(plaque, .id)
-    if voitureExist = 1 {
+    if ##class(data.Voiture).consulterParPlaqueExists(plaque, .id) {
         set tsc = ##class(data.Voiture).%DeleteId(id)
+        if 'tsc {
+            set pResponse.codeRetour = "KO"
+            set pResponse.libErreur = "Erreur lors de la suppresion"
+            Quit $$$OK
+        }
         set pResponse.codeRetour = "OK"
+        Quit $$$OK
     }
-    else {
-        set pResponse.codeRetour = "KO"
-    }
+    set pResponse.codeRetour = "KO"
+    set pResponse.libErreur = "La voiture n'existe pas"
+
     Quit $$$OK
 }
 
