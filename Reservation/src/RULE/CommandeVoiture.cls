@@ -10,7 +10,10 @@ XData RuleDefinition [ XMLNamespace = "http://www.intersystems.com/rule" ]
 <ruleSet name="" effectiveBegin="" effectiveEnd="">
 <rule name="">
 <constraint name="source" value="ServiceFichierVoitureCommande"></constraint>
-<constraint name="msgClass" value="msg.creerVoitureCommandeDmde"></constraint>
+<when condition="1=1">
+<send transform="Transform.TransformVoitureCommandeToVoiture" target="Voiture"></send>
+<return></return>
+</when>
 </rule>
 </ruleSet>
 </ruleDefinition>

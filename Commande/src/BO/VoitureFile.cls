@@ -7,12 +7,12 @@ Parameter INVOCATION = "Queue";
 
 Method pushFileVoiture(pRequest As msg.pushVoitureFileDmde, Output pResponse As msg.pushVoitureFileRpse) As %Status
 {
-  Set pResponse = ##class(msg.getCatalogueRpse).%New()
+  Set pResponse = ##class(msg.pushVoitureFileRpse).%New()
   $$$TRACE(pRequest)
 
   Set file = ##class(%Library.FileBinaryStream).%New()
 
-  do file.Write(pRequest.voiture.modele_";"_pRequest.voiture.modele_";"
+  do file.Write(pRequest.voiture.marque_";"_pRequest.voiture.modele_";"
     _pRequest.voiture.categorie_";"_pRequest.voiture.plaque_";"
     _pRequest.voiture.couleur_";"_pRequest.voiture.nbPlaces)
 
