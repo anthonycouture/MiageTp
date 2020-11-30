@@ -3,7 +3,7 @@ Class Production.ProductionReservation Extends Ens.Production
 
 XData ProductionDefinition
 {
-<Production Name="Production.ProductionReservation" LogGeneralTraceEvents="false">
+<Production Name="Production.ProductionReservation" TestingEnabled="true" LogGeneralTraceEvents="false">
   <Description></Description>
   <ActorPoolSize>1</ActorPoolSize>
   <Item Name="Voiture" Category="" ClassName="BO.Voiture" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
@@ -17,6 +17,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="CommandeVoiture" Category="" ClassName="EnsLib.MsgRouter.RoutingEngine" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
     <Setting Target="Host" Name="BusinessRuleName">RULE.CommandeVoiture</Setting>
+  </Item>
+  <Item Name="Reservation" Category="" ClassName="BO.Reservation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
 </Production>
 }
