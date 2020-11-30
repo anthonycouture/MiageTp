@@ -1,4 +1,4 @@
-Class msg.commandeDmde Extends Ens.Request
+Class msg.commandeDmde Extends (Ens.Request, %JSON.Adaptor)
 {
 
 Property marque As %String;
