@@ -23,17 +23,35 @@ Method getVoitureByCategorie(pRequest As msg.getVoitureByCategorieDmde, Output p
     set SQLrequest = statement.%Execute()
     do SQLrequest.%Next()
     set plaque = SQLrequest.%Get("plaque")
-    $$$TRACE(plaque)
     set pResponse.plaque = plaque
     
-
-    set pResponse.codeRetour = "OK"
+    if $LENGTH(plaque) > 0 {
+        set pResponse.codeRetour = "OK"
+        Quit $$$OK
+    }
+    set pResponse.codeRetour = "KO"
+    set pResponse.libErreur = "Pas de voiture disponible"
     Quit $$$OK
 }
 
 Method creerReservation(pRequest As msg.creerReservationDmde, Output pResponse As msg.creerReservationRpse) As %Status
 {
     set pResponse = ##class(msg.creerReservationRpse).%New() 
+
+    set reservation = ##class(data.Reservation).%New()
+    $$$TRACE(pRequest.plaque)
+    do ##class(data.Voiture).consulterParPlaqueExists(pRequest.plaque, .id)
+    set reservation.voiture = ##class(data.Voiture).%OpenId(id)
+    set reservation.dateDebut = pRequest.dateDebut
+    set reservation.dateFin = pRequest.dateFin
+
+    set tsc = reservation.%Save()
+
+    if 'tsc {
+            set pResponse.codeRetour = "KO"
+            set pResponse.libErreur = "Erreur lors de la réservation"
+            Quit $$$OK
+    }
 
     set pResponse.codeRetour = "OK"
     Quit $$$OK
