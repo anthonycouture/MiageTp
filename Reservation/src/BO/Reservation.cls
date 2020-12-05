@@ -39,7 +39,6 @@ Method creerReservation(pRequest As msg.creerReservationDmde, Output pResponse A
     set pResponse = ##class(msg.creerReservationRpse).%New() 
 
     set reservation = ##class(data.Reservation).%New()
-    $$$TRACE(pRequest.plaque)
     do ##class(data.Voiture).consulterParPlaqueExists(pRequest.plaque, .id)
     set reservation.voiture = ##class(data.Voiture).%OpenId(id)
     set reservation.dateDebut = pRequest.dateDebut
@@ -57,6 +56,33 @@ Method creerReservation(pRequest As msg.creerReservationDmde, Output pResponse A
     Quit $$$OK
 }
 
+Method nbReservationFuture(pRequest As msg.nbReservationFutureDmde, Output pResponse As msg.nbReservationFutureRpse) As %Status
+{
+    set pResponse = ##class(msg.nbReservationFutureRpse).%New()
+    set sql = "select count(*) as nbReservation from data.Reservation"
+    set sql = sql_" WHERE dateFin >= NOW() AND voiture->plaque = '"_pRequest.plaque_"'"
+
+    set statement = ##class(%SQL.Statement).%New()
+    do statement.%Prepare(sql)
+    set sqlRequest = statement.%Execute()
+    do sqlRequest.%Next()
+    set pResponse.nbReservation = sqlRequest.%Get("nbReservation")
+    set pResponse.codeRetour = "OK"
+    Quit $$$OK
+}
+
+Method suppressionReservation(pRequest As msg.suppressionReservationDmde, Output pResponse As msg.suppressionReservationRpse) As %Status
+{
+    set pResponse = ##class(msg.suppressionReservationRpse).%New()
+    set sql = "delete from data.Reservation where voiture->plaque = '"_pRequest.plaque_"'"
+    set statement = ##class(%SQL.Statement).%New()
+    do statement.%Prepare(sql)
+    set sqlRequest = statement.%Execute()
+
+    set pResponse.codeRetour = "OK"
+    Quit $$$OK
+}
+
 XData MessageMap
 {
 <MapItems>
@@ -65,6 +91,12 @@ XData MessageMap
     </MapItem>
     <MapItem MessageType="msg.creerReservationDmde">
         <Method>creerReservation</Method>
+    </MapItem>
+    <MapItem MessageType="msg.nbReservationFutureDmde">
+        <Method>nbReservationFuture</Method>
+    </MapItem>
+    <MapItem MessageType="msg.suppressionReservationDmde">
+        <Method>suppressionReservation</Method>
     </MapItem>
 </MapItems>
 }

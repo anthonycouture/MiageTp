@@ -25,7 +25,7 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="HTTPPort">52773</Setting>
     <Setting Target="Adapter" Name="HTTPServer">localhost</Setting>
     <Setting Target="Adapter" Name="URL">/api/reservation/voiture/</Setting>
-    <Setting Target="Adapter" Name="Credentials">intersystems</Setting>
+    <Setting Target="Adapter" Name="Credentials">intersystem</Setting>
   </Item>
 </Production>
 }
