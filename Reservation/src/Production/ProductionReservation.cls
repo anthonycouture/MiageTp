@@ -30,6 +30,8 @@ XData ProductionDefinition
   </Item>
   <Item Name="SortirParcVoiture" Category="" ClassName="BP.sortirParcVoiture" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
   </Item>
+  <Item Name="ServiceSortirParcVoiture" Category="" ClassName="BS.ServiceSortirParcVoiture" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 

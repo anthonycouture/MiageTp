@@ -14,6 +14,8 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 <Route Url="/voiture/" Method="POST" Call="CreerVoiture"/>
 <!-- Créer une réservation -->
 <Route Url="/createreservation/" Method="POST" Call="CreerReservation"/>
+<!-- Sortir du parc une voiture -->
+<Route Url="/sortirparcvoiture/" Method="POST" Call="SortirParcVoiture"/>
 </Routes>
 }
 
@@ -64,6 +66,22 @@ ClassMethod CreerReservation() As %Status
 
     set tSC = ##class(Ens.Director).CreateBusinessService("ServiceReservation",.tService) if $$$ISERR(tSC) quit 
     set tSC = tService.ProcessInput(msg,.response,"creerReservation")
+    Set %response.Status = 200
+    Set %response.ContentType = ..#CONTENTTYPEJSON
+    Do response.%JSONExport()
+    Quit tSC
+}
+
+ClassMethod SortirParcVoiture() As %Status
+{
+    #dim tSC As %Status = $$$OK
+    Set msg = ##class(msg.sortirParcVoitureDmde).%New()
+
+    Set data=%request.Content
+    $$$TOE(tSC,msg.%JSONImport(data))
+
+    set tSC = ##class(Ens.Director).CreateBusinessService("ServiceSortirParcVoiture",.tService) if $$$ISERR(tSC) quit 
+    set tSC = tService.ProcessInput(msg,.response,"sortirParcVoiture")
     Set %response.Status = 200
     Set %response.ContentType = ..#CONTENTTYPEJSON
     Do response.%JSONExport()
