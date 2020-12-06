@@ -27,6 +27,16 @@ XData ProductionDefinition
     <Setting Target="Adapter" Name="URL">/api/reservation/voiture/</Setting>
     <Setting Target="Adapter" Name="Credentials">intersystem</Setting>
   </Item>
+  <Item Name="SortirParcReservation" Category="" ClassName="BO.SortirParcReservation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Adapter" Name="HTTPServer">localhost</Setting>
+    <Setting Target="Adapter" Name="HTTPPort">52773</Setting>
+    <Setting Target="Adapter" Name="Credentials">intersystem</Setting>
+    <Setting Target="Adapter" Name="URL">/api/reservation/sortirparcvoiture/</Setting>
+  </Item>
+  <Item Name="SortirParcVoiture" Category="" ClassName="BP.SortirParcVoiture" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="ServiceSortirParcVoiture" Category="" ClassName="BS.ServiceSortirParcVoiture" PoolSize="0" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
 </Production>
 }
 
