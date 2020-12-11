@@ -18,7 +18,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 </parameters>
 </property>
 </context>
-<sequence xend='200' yend='700' >
+<sequence xend='200' yend='1050' >
 <call name='get voiture dispo by categorie' target='Reservation' async='0' xpos='200' ypos='250' >
 <request type='msg.getVoitureByCategorieDmde' >
 <assign property="callrequest.categorie" value="request.categorie" action="set" />
@@ -31,7 +31,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="response.libErreur" value="callresponse.libErreur" action="set" />
 </response>
 </call>
-<if name='Dispo ?' condition='response.codeRetour="OK"' xpos='200' ypos='350' xend='200' yend='600' >
+<if name='Dispo ?' condition='response.codeRetour="OK"' xpos='200' ypos='350' xend='200' yend='950' >
 <true>
 <call name='Reservation' target='Reservation' async='0' xpos='335' ypos='500' >
 <request type='msg.creerReservationDmde' >
@@ -44,6 +44,11 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <assign property="response.libErreur" value="callresponse.libErreur" action="set" />
 </response>
 </call>
+<if name='Reservation ok ?' condition='response.codeRetour="OK"' xpos='335' ypos='600' xend='335' yend='850' >
+<true>
+<assign name="Affecte plaque reponse" property="response.plaque" value="context.plaque" action="set" xpos='470' ypos='750' />
+</true>
+</if>
 </true>
 </if>
 </sequence>
