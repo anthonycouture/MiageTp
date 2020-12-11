@@ -1,12 +1,37 @@
 # Explication de la réalisation pour la notation du TP
-Binôme : Anthony Couture et Florian Barbet
+**Binôme : Anthony Couture et Florian Barbet**
 
-Pour l'ensemble des tests j'utilise la voiture **BMW X1** de type **4x4**.  
-Après l'avoir créer elle a la plaque **AA-003-AA**
+Pour l'ensemble des tests j'utilise la voiture **BMW X1** de type **4x4** qui est la seule voiture de ma BDD.  
+Après l'avoir créé elle a la plaque **AA-003-AA**
 
-Dans le namespace Reservation je vais réserver ma voiture grâce à l'appel à cette URL : **/reservation/createreservation/**  
+La démo des exercices a été écrite le 11/12/2020 ce qui est important pour comprendre le bon fonctionnement.
+
+## Exercice noté 1
+Dans le namespace Reservation je vais réserver ma voiture grâce à l'appel à cette URL : **/api/reservation/createreservation/**  
+Voici le BP :  
+![Image de reservation BP](./images/Reservation_BP.png)  
 Comme la voiture n'a pas de réservation c'est ok:  
-![Image de reservation ok](./images/Reservation_ok.png)
+![Image de reservation ok](./images/Reservation_ok.png)  
+![Image de reservation ok en BDD](./images/Reservation_ok_BDD.png)  
+Si je souhaite réaliser la même réservation c'est ko car la voiture est réservé et j'ai que celle la dans cette catégorie :  
+![Image de reservation ok](./images/Reservation_ko.png)  
+
+
+## Exercice noté 2
+Dans le namespace Commande je peux sortir une voiture du parc grâce à l'appel à cette URL : **/api/commande/sortirparcvoiture/**  
+Comme je dois faire une gestion aussi dans le namespace Reservation j'ai créé cette URL dans celui-ci : **/api/reservation/sortirparcvoiture/** qui permet d'appeler un BP qui fera les vérifications nécéssaires pour savoir si la voiture est réservé et si pas réservé de faire les bonnes suppressions.  
+Voici le BP dans le namespace Réservation :  
+![Image de reservation BP sortir parc](./images/Sortir_voiture_bp_reservation.png)  
+Voici le BP dans le namespace Commande :  
+![Image de commande BP sortir parc](./images/Sortir_voiture_bp_commande.png)  
+Ma voiture est réservé lors de l'exercice noté précédent donc si j'essaye de la sortir c'est ko :  
+![Image de sortir parc ko](./images/Sortir_voiture_ko.png)  
+J'ai changé la réservation de la voiture qui est une réservation terminé je peux donc sortir ma voiture du parc donc c'est ok :  
+![Image de reservation terminer](./images/Sortir_voiture_reservation_terminer_bdd.png)  
+![Image de sortir parc ok](./images/Sortir_voiture_ok.png)  
+La voiture n'existe plus en BDD :  
+![Image de sortir parc ok bdd](./images/Sortir_voiture_ok_bdd.png)  
+![Image de sortir parc ok bdd1](./images/Sortir_voiture_ok_bdd_1.png)  
 
 # Indication pour le TP
 
