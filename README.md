@@ -1,3 +1,15 @@
+# Explication de la réalisation pour la notation du TP
+Binôme : Anthony Couture et Florian Barbet
+
+Pour l'ensemble des tests j'utilise la voiture **BMW X1** de type **4x4**.  
+Après l'avoir créer elle a la plaque **AA-003-AA**
+
+Dans le namespace Reservation je vais réserver ma voiture grâce à l'appel à cette URL : **/reservation/createreservation/**  
+Comme la voiture n'a pas de réservation c'est ok:  
+![Image de reservation ok](./images/Reservation_ok.png)
+
+# Indication pour le TP
+
 ## intersystems-iris-docker-rest-template
 This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
 It also has OPEN API spec, 
